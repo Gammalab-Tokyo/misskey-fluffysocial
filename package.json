@@ -1,6 +1,6 @@
 {
 	"name": "misskey",
-	"version": "13.11.1-fluffysocial",
+	"version": "13.11.1-fluffysocial.0",
 	"codename": "nasubi",
 	"repository": {
 		"type": "git",
