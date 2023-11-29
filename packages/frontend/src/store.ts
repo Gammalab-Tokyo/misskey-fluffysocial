@@ -397,7 +397,7 @@ export const defaultStore = markRaw(new Storage('base', {
 	},
 	sound_notification: {
 		where: 'device',
-		default: { type: 'syuilo/n-ea', volume: 1 },
+		default: { type: 'fluffysocial/elevator', volume: 1 },
 	},
 	sound_antenna: {
 		where: 'device',

@@ -59,6 +59,7 @@ export const soundsTypes = [
 	'noizenecio/kick_gaba5',
 	'noizenecio/kick_gaba6',
 	'noizenecio/kick_gaba7',
+	'fluffysocial/elevator'
 ] as const;
 
 export async function getAudio(file: string, useCache = true) {
