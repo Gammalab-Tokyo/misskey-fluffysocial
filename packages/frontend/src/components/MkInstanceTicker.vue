@@ -4,9 +4,12 @@ SPDX-License-Identifier: AGPL-3.0-only
 -->
 
 <template>
-<div :class="$style.root" :style="bg">
-	<img v-if="faviconUrl" :class="$style.icon" :src="faviconUrl"/>
-	<div :class="$style.name">{{ instance.name }}</div>
+<div :class="$style.root" :style="bg" v-if="isforwarded">
+		<div :class="$style.name">via 出張所</div>
+</div>
+<div :class="$style.root" :style="bg" v-else>
+		<img v-if="faviconUrl" :class="$style.icon" :src="faviconUrl"/>
+		<div :class="$style.name">{{ instance.name }}</div>
 </div>
 </template>
 
@@ -15,6 +18,7 @@ import { computed } from 'vue';
 import { instanceName } from '@@/js/config.js';
 import { instance as Instance } from '@/instance.js';
 import { getProxiedImageUrlNullable } from '@/scripts/media-proxy.js';
+import { defaultStore } from '@/store.js';
 
 const props = defineProps<{
 	instance?: {
@@ -34,8 +38,10 @@ const faviconUrl = computed(() => props.instance ? getProxiedImageUrlNullable(pr
 
 const themeColor = instance.themeColor ?? '#777777';
 
+const isforwarded = defaultStore.state.tl.src === 'local';
+
 const bg = {
-	background: `linear-gradient(90deg, ${themeColor}, ${themeColor}00)`,
+	background: isforwarded ? `linear-gradient(90deg, ${themeColor}20, ${themeColor}00)` : `linear-gradient(90deg, ${themeColor}, ${themeColor}00)`,
 };
 </script>
 

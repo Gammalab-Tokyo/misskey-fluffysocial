@@ -48,6 +48,9 @@ class LocalTimelineChannel extends Channel {
 
 	@bindThis
 	private async onNote(note: Packed<'Note'>) {
+
+		if (!note.renote || note.user.host !== "relay.fluffy.social") {
+
 		if (this.withFiles && (note.fileIds == null || note.fileIds.length === 0)) return;
 
 		if (note.user.host !== null) return;
@@ -70,6 +73,10 @@ class LocalTimelineChannel extends Channel {
 				const myRenoteReaction = await this.noteEntityService.populateMyReaction(note.renote, this.user.id);
 				note.renote.myReaction = myRenoteReaction;
 			}
+		}
+
+		} else {
+			note = note.renote;
 		}
 
 		this.connection.cacheNote(note);

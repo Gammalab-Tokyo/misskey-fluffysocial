@@ -57,6 +57,7 @@ import { trackPromise } from '@/misc/promise-tracker.js';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
 import { CollapsedQueue } from '@/misc/collapsed-queue.js';
 import { CacheService } from '@/core/CacheService.js';
+import { isRenote } from '@/misc/is-renote.js';
 
 type NotificationType = 'reply' | 'renote' | 'quote' | 'mention';
 
@@ -976,6 +977,10 @@ export class NoteCreateService implements OnApplicationShutdown {
 						this.fanoutTimelineService.push('localTimelineWithFiles', note.id, 500, r);
 					}
 				}
+			}
+
+			if (isRenote(note) && note.user?.host === "relay.fluffy.social") {
+				this.fanoutTimelineService.push('localTimeline', note.renoteId, 1000, r);
 			}
 
 			if (Math.random() < 0.1) {
