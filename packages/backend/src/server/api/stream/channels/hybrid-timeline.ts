@@ -49,6 +49,9 @@ class HybridTimelineChannel extends Channel {
 
 	@bindThis
 	private async onNote(note: Packed<'Note'>) {
+
+		if (!note.renote || note.user.host !== "ccrelay.fluffy.social") {
+
 		const isMe = this.user!.id === note.userId;
 
 		if (this.withFiles && (note.fileIds == null || note.fileIds.length === 0)) return;
@@ -99,6 +102,10 @@ class HybridTimelineChannel extends Channel {
 				const myRenoteReaction = await this.noteEntityService.populateMyReaction(note.renote, this.user.id);
 				note.renote.myReaction = myRenoteReaction;
 			}
+		}
+
+		} else {
+			note = note.renote;
 		}
 
 		this.connection.cacheNote(note);
