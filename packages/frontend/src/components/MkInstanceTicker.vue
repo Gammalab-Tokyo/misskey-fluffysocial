@@ -4,10 +4,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 -->
 
 <template>
-<div :class="$style.root" :style="bg" v-if="isforwarded">
-		<div :class="$style.name">via 出張所</div>
-</div>
-<div :class="$style.root" :style="bg" v-else>
+<div :class="$style.root" :style="bg" v-if="!isforwarded">
 		<img v-if="faviconUrl" :class="$style.icon" :src="faviconUrl"/>
 		<div :class="$style.name">{{ instance.name }}</div>
 </div>
