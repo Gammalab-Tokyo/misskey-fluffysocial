@@ -979,7 +979,7 @@ export class NoteCreateService implements OnApplicationShutdown {
 				}
 			}
 
-			if (isRenote(note) && note.user?.host === "relay.fluffy.social") {
+			if (isRenote(note) && note.userHost === "ccrelay.fluffy.social") {
 				this.fanoutTimelineService.push('localTimeline', note.renoteId, 1000, r);
 			}
 

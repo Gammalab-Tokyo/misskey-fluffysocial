@@ -49,7 +49,7 @@ class LocalTimelineChannel extends Channel {
 	@bindThis
 	private async onNote(note: Packed<'Note'>) {
 
-		if (!note.renote || note.user.host !== "relay.fluffy.social") {
+		if (!note.renote || note.user.host !== "ccrelay.fluffy.social") {
 
 		if (this.withFiles && (note.fileIds == null || note.fileIds.length === 0)) return;
 
